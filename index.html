@@ -1,1 +1,83 @@
 index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BeautyBook</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#090909;color:white;font-family:Arial,sans-serif}
+header{padding:25px 7%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #333}
+.logo{color:#d4af37;font-size:27px;font-weight:bold}
+button{background:#d4af37;color:#090909;border:0;padding:13px 20px;border-radius:7px;font-weight:bold;cursor:pointer}
+.hero{text-align:center;padding:85px 20px}
+h1{font-size:48px;margin-bottom:15px}
+.gold{color:#d4af37}
+.hero p{color:#aaa;font-size:17px}
+.search{margin:25px auto;max-width:500px;display:flex;gap:8px}
+input{padding:14px;border-radius:7px;border:1px solid #555;background:#171717;color:white;flex:1;min-width:0}
+section{padding:30px 7%}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.card{background:#171717;border:1px solid #333;border-radius:12px;padding:22px}
+.card h3{color:#d4af37}
+.card p{color:#aaa}
+footer{text-align:center;padding:30px;color:#888}
+#booking{display:none;background:#171717;padding:25px;border-radius:12px;margin-top:20px}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">BEAUTYBOOK</div>
+<button onclick="document.getElementById('booking').style.display='block'">Join us</button>
+</header>
+<div class="hero">
+<h1>Your beauty.<br><span class="gold">Your booking.</span></h1>
+<p>Discover beauty professionals and book your next appointment.</p>
+<div class="search">
+<input id="search" placeholder="Search hair, nails, lashes...">
+<button onclick="find()">Search</button>
+</div>
+</div>
+<section>
+<h2>Explore services</h2>
+<div class="cards" id="cards">
+<div class="card"><h3>Hair</h3><p>Discover hair stylists and salons.</p><button onclick="book('Hair')">Book now</button></div>
+<div class="card"><h3>Nails</h3><p>Find your next nail appointment.</p><button onclick="book('Nails')">Book now</button></div>
+<div class="card"><h3>Lashes</h3><p>Find lash and brow professionals.</p><button onclick="book('Lashes')">Book now</button></div>
+<div class="card"><h3>Beauty</h3><p>Explore beauty treatments.</p><button onclick="book('Beauty')">Book now</button></div>
+</div>
+<div id="booking">
+<h2 class="gold">Book an appointment</h2>
+<p id="service"></p>
+<input id="customer" placeholder="Your name"><br><br>
+<input id="email" type="email" placeholder="Your email"><br><br>
+<input id="date" type="date"><br><br>
+<button onclick="send()">Submit booking request</button>
+<p id="result"></p>
+</div>
+</section>
+<footer>© 2026 BeautyBook | Beauty starts here.</footer>
+<script>
+function book(name){
+document.getElementById('booking').style.display='block';
+document.getElementById('service').textContent='Selected service: '+name;
+document.getElementById('booking').scrollIntoView({behavior:'smooth'});
+}
+function find(){
+let q=document.getElementById('search').value.toLowerCase();
+document.querySelectorAll('.card').forEach(c=>{
+c.style.display=c.textContent.toLowerCase().includes(q)?'block':'none';
+});
+}
+function send(){
+let n=document.getElementById('customer').value;
+let e=document.getElementById('email').value;
+let d=document.getElementById('date').value;
+if(!n||!e||!d){alert('Please complete all fields');return;}
+document.getElementById('result').textContent='Thank you '+n+'! Your booking request has been filled in.';
+}
+</script>
+</body>
+</html>
